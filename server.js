@@ -23,6 +23,7 @@ let requestOptions = {
 
 let location;
 let temperature;
+let t;
 
 // axios(config)
 //   .then(function (response) {
@@ -66,7 +67,7 @@ const listener = (req, res) => {
       ).then(
         (jsonResponse) => {
           temperature = jsonResponse.current.temp_c;
-          let t = temperature.toString();
+          t = temperature.toString();
           console.log(t);
           //console.log(jsonResponse.ip, location);
         }
