@@ -15,22 +15,22 @@ let requestOptions = {
 //   .then(result => console.log(result))
 //   .catch(error => console.log('error', error));
 
-let config = {
-  method: 'get',
-  url: 'https://api.geoapify.com/v1/ipinfo?&apiKey=37b4d84debf64f798d5ab1455f5c0424',
-  headers: { }
-};
+// let config = {
+//   method: 'get',
+//   url: 'https://api.geoapify.com/v1/ipinfo?&apiKey=37b4d84debf64f798d5ab1455f5c0424',
+//   headers: { }
+// };
 
 let location;
 
-axios(config)
-  .then(function (response) {
-    location = response.data.city.name;
-    console.log(location);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+// axios(config)
+//   .then(function (response) {
+//     location = response.data.city.name;
+//     console.log(location);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
 
 
 const listener = (req, res) => {
@@ -49,10 +49,16 @@ const listener = (req, res) => {
 
       let clientIps = req.headers['x-forwarded-for'];
       let clientIpArray = clientIps.split(',');
-
-      console.log(clientIpArray[0]);
-
       let ip= clientIpArray[0]
+
+      fetch(`https://ipinfo.io/${ip}?token=6d87f15da732b5`).then(
+        (response) => response.json()
+      ).then(
+        (jsonResponse) => {
+          location = jsonResponse.city;
+          //console.log(jsonResponse.ip, location);
+        }
+      )
 
       let message = {
         "client_ip": ip,
