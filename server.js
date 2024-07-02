@@ -23,7 +23,6 @@ let requestOptions = {
 
 let location;
 let temperature;
-let t;
 
 // axios(config)
 //   .then(function (response) {
@@ -45,7 +44,7 @@ const listener = (req, res) => {
       let q = url.parse(req.url, true).query;
       let name = q.visitor_name.replace('"', '').replace('"', '');
 
-      let greeting = `Hello, ${name}!, the temperature is ${t} degrees Celcius in ${location}`
+      let greeting = `Hello, ${name}!, the temperature is ${temperature} degrees Celcius in ${location}`
 
       console.log(req.connection.remoteAddress);
 
@@ -67,8 +66,10 @@ const listener = (req, res) => {
       ).then(
         (jsonResponse) => {
           temperature = jsonResponse.current.temp_c;
-          t = temperature.toString();
-          console.log(t);
+          console.log(jsonResponse.current);
+          temperature = temperature.toString();
+          temperature = "" + temperature;
+          console.log(temperature);
           //console.log(jsonResponse.ip, location);
         }
       )
