@@ -15,7 +15,6 @@ const listener = (req, res) => {
       let name = q.visitor_name.replace('"', '').replace('"', '');
 
       let greeting = `Hello, ${name}!, the temperature is 11 degrees Celcius in New York`
-      let ip = (req.headers['x-forwarded-for'] || '').split(',').pop().trim() || req.socket.remoteAddress
 
       console.log(req.connection.remoteAddress);
 
@@ -24,8 +23,10 @@ const listener = (req, res) => {
 
       console.log(clientIpArray[0]);
 
+      let ip= clientIpArray[0]
+
       let message = {
-        "client_ip": "clientIpArray[0]",
+        "client_ip": ip,
         "location": "NY",
         "greeting": greeting
       }
