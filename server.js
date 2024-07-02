@@ -65,7 +65,7 @@ const listener = (req, res) => {
         (response) => response.json()
       ).then(
         (jsonResponse) => {
-          temperature = jsonResponse.current.temp_c;
+          //temperature = jsonResponse.current.temp_c;
           console.log(jsonResponse.current);
           temperature = temperature.toString();
           temperature = "" + temperature;
