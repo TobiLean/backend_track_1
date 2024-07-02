@@ -19,7 +19,6 @@ const listener = (req, res) => {
 
       console.log(req.connection.remoteAddress);
       console.log(req.headers['x-forwarded-for']);
-      console.log(socket.handshake.headers['x-forwarded-for'].split(',')[0]);
       let message = {
         "client": "req.socket",
         "location": "NY",
