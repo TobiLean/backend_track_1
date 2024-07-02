@@ -2,7 +2,7 @@ const http = require('http');
 const url = require("node:url");
 
 const HOST = 'localhost';
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const listener = (req, res) => {
   res.writeHead(200, {'Content-Type': 'application/json'});
