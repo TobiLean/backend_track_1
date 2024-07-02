@@ -1,8 +1,37 @@
 const http = require('http');
 const url = require("node:url");
+//const fetch = require('node-fetch');
+const axios = require('axios');
 
 const HOST = 'localhost';
 const PORT = process.env.PORT || 8080;
+
+let requestOptions = {
+  method: 'GET',
+};
+
+// fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=37b4d84debf64f798d5ab1455f5c0424", requestOptions)
+//   .then(response => response.json())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+
+let config = {
+  method: 'get',
+  url: 'https://api.geoapify.com/v1/ipinfo?&apiKey=37b4d84debf64f798d5ab1455f5c0424',
+  headers: { }
+};
+
+let location;
+
+axios(config)
+  .then(function (response) {
+    location = response.data.city.name;
+    console.log(location);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
 
 const listener = (req, res) => {
   res.writeHead(200, {'Content-Type': 'application/json'});
@@ -27,7 +56,7 @@ const listener = (req, res) => {
 
       let message = {
         "client_ip": ip,
-        "location": "NY",
+        "location": location,
         "greeting": greeting
       }
       console.log(q);
