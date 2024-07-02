@@ -57,19 +57,19 @@ const listener = (req, res) => {
       ).then(
         (jsonResponse) => {
           location = jsonResponse.city;
-          //console.log(jsonResponse.ip, location);
-        }
-      )
 
-      fetch(`https://api.weatherapi.com/v1/current.json?key=2db5af654f9d4b76ba1221907240207&q=${location}`).then(
-        (response) => response.json()
-      ).then(
-        (jsonResponse) => {
-          //temperature = jsonResponse.current.temp_c;
-          console.log(jsonResponse.current);
-          temperature = temperature.toString();
-          temperature = "" + temperature;
-          console.log(temperature);
+          fetch(`https://api.weatherapi.com/v1/current.json?key=2db5af654f9d4b76ba1221907240207&q=${location}`).then(
+            (response) => response.json()
+          ).then(
+            (jsonResponse) => {
+              //temperature = jsonResponse.current.temp_c;
+              console.log(jsonResponse);
+              temperature = temperature.toString();
+              temperature = "" + temperature;
+              console.log(temperature);
+              //console.log(jsonResponse.ip, location);
+            }
+          )
           //console.log(jsonResponse.ip, location);
         }
       )
