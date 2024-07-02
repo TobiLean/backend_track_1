@@ -44,7 +44,7 @@ const listener = (req, res) => {
       let q = url.parse(req.url, true).query;
       let name = q.visitor_name.replace('"', '').replace('"', '');
 
-      let greeting = `Hello, ${name}!, the temperature is 11 degrees Celcius in New York`
+      let greeting = `Hello, ${name}!, the temperature is ${temperature} degrees Celcius in ${location}`
 
       console.log(req.connection.remoteAddress);
 
@@ -65,7 +65,7 @@ const listener = (req, res) => {
         (response) => response.json()
       ).then(
         (jsonResponse) => {
-          temperature = jsonResponse;
+          temperature = jsonResponse.current.temp_c;
           console.log(temperature);
           //console.log(jsonResponse.ip, location);
         }
