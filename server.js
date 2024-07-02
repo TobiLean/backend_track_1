@@ -18,9 +18,14 @@ const listener = (req, res) => {
       let ip = (req.headers['x-forwarded-for'] || '').split(',').pop().trim() || req.socket.remoteAddress
 
       console.log(req.connection.remoteAddress);
-      console.log(req.headers['x-forwarded-for']);
+
+      let clientIps = req.headers['x-forwarded-for'];
+      let clientIpArray = clientIps.split(',');
+
+      console.log(clientIpArray[0]);
+
       let message = {
-        "client": "req.socket",
+        "client_ip": "clientIpArray[0]",
         "location": "NY",
         "greeting": greeting
       }
